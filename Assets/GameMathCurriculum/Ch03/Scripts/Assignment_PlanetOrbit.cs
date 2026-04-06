@@ -49,7 +49,7 @@ public class Assignment_PlanetOrbit : MonoBehaviour
 
     private void Update()
     { 
-        Matrix4x4 planetMatrix = Matrix4x4.TRS(
+        Matrix4x4 planetMatrix = Matrix4x4.TRS(  // 행성의 월드 행렬 계산
             orbitCenter,
             Quaternion.Euler(0f, Time.time * planetOrbitSpeed, 0f),
             Vector3.one
@@ -66,8 +66,8 @@ public class Assignment_PlanetOrbit : MonoBehaviour
         );
 
         // 위성의 로컬 오프셋을 행렬로 월드 좌표로 변환
-        satelliteLocalPos = new Vector3(satelliteOrbitRadius, 0f, 0f);
-        satelliteWorldPos = satelliteMatrix.MultiplyPoint3x4(satelliteLocalPos);
+        satelliteLocalPos = new Vector3(satelliteOrbitRadius, 0f, 0f); // 행성 기준으로 위성의 로컬 오프셋을 행렬로 월드 좌표로 변환
+        satelliteWorldPos = satelliteMatrix.MultiplyPoint3x4(satelliteLocalPos); // 행성의 월드 좌표를 기준으로 위성의 로컬 오프셋을 행렬로 월드 좌표로 변환
 
         if (satellite != null)
             satellite.position = satelliteWorldPos;
